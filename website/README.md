@@ -19,6 +19,9 @@ PS: Not sure how to get that contact form working? Give formspree.io a try (it's
 Credits:
 
 	Demo images:
+		Title background image: Photo by JJ Ying on Unsplash
+		Description 1 image: Photo by Sam Balye on Unsplash
+		Description 2 image: Photo by Marvin Meyer on Unsplash
 
 	Icons:
 		Font Awesome (fortawesome.github.com/Font-Awesome)
