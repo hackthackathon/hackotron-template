@@ -4,7 +4,7 @@ from github import Github
 import os
 import numpy as np
 
-g = Github(os.environ["GITHUB_SECRET"])
+g = Github(os.environ["GITHUB_TOKEN"])
 repo = g.get_repo(os.environ["REPO_NAME"])
 
 issues = pd.read_csv("checklist-issues.txt", skiprows=1, 

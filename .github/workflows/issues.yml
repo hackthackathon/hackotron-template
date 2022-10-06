@@ -30,5 +30,5 @@ jobs:
     - name: create issues
       run: python create_issues.py
       env:
-        GITHUB_SECRET: ${{ secrets.GITHUB_SECRET }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         REPO_NAME: ${{ github.repository }}
