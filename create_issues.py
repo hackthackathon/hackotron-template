@@ -40,13 +40,13 @@ pal = ['0173b2',
       'ece133',
       '56b4e9']
 
-for i, l in enumerate(labels):
-    try:
-        repo.create_label(l, pal[i])
-    except GithubException as e:
-        if e.data["errors"][0].get("code", None) != "already_exists":
-            raise 
-
+#for i, l in enumerate(labels):
+#    try:
+#        repo.create_label(l, pal[i])
+#    except GithubException as e:
+#        if e.data["errors"][0].get("code", None) != "already_exists":
+#            raise 
+#
 labels = repo.get_labels()
 label_titles = [l.name for l in labels]
 
@@ -58,14 +58,16 @@ for i in issues.index[:2]:
 
     title = issues.loc[i,"issue"]
 
-    lname = issues.loc[i,"label"]
-    lname = lname.split()
-    label = []
-    for l in lname:
-        lidx = label_titles.index(l)
-        label.append(labels[lidx])
+#    lname = issues.loc[i,"label"]
+#    lname = lname.split()
+#    label = []
+#    for l in lname:
+#        lidx = label_titles.index(l)
+#        label.append(labels[lidx])
     try:
-        repo.create_issue(title=title, labels=label, milestone=milestone)
+#        repo.create_issue(title=title, labels=label, milestone=milestone)
+        repo.create_issue(title=title, milestone=milestone)
+
     except GithubException as e:
         print(e)
         if e.data["errors"][0].get("code", None) != "already_exists":
