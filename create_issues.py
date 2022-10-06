@@ -13,12 +13,12 @@ issues = issues.applymap(lambda x: x.strip())
 
 
 # create milestones
-#for m in issues['milestone'].unique():
-#    try:
-#        repo.create_milestone(title=m, state='open')
-#    except GithubException as e:
-#        if e.data["errors"][0].get("code", None) != "already_exists":
-#            raise 
+for m in issues['milestone'].unique():
+    try:
+        repo.create_milestone(title=m, state='open')
+    except GithubException as e:
+        if e.data["errors"][0].get("code", None) != "already_exists":
+            raise 
 
 milestones = repo.get_milestones()
 milestone_titles = [m.title for m in milestones]
@@ -40,33 +40,32 @@ pal = ['0173b2',
       'ece133',
       '56b4e9']
 
-#for i, l in enumerate(labels):
-#    try:
-#        repo.create_label(l, pal[i])
-#    except GithubException as e:
-#        if e.data["errors"][0].get("code", None) != "already_exists":
-#            raise 
-#
+for i, l in enumerate(labels):
+    try:
+        repo.create_label(l, pal[i])
+    except GithubException as e:
+        if e.data["errors"][0].get("code", None) != "already_exists":
+            raise 
+
 labels = repo.get_labels()
 label_titles = [l.name for l in labels]
 
 # create issues
-for i in issues.index[:2]:
+for i in issues.index:
     m = issues.loc[i, "milestone"]
     idx = milestone_titles.index(m)
     milestone = milestones[idx]
 
     title = issues.loc[i,"issue"]
 
-#    lname = issues.loc[i,"label"]
-#    lname = lname.split()
-#    label = []
-#    for l in lname:
-#        lidx = label_titles.index(l)
-#        label.append(labels[lidx])
+    lname = issues.loc[i,"label"]
+    lname = lname.split()
+    label = []
+    for l in lname:
+        lidx = label_titles.index(l)
+        label.append(labels[lidx])
     try:
-#        repo.create_issue(title=title, labels=label, milestone=milestone)
-        repo.create_issue(title=title, milestone=milestone)
+        repo.create_issue(title=title, labels=label, milestone=milestone)
 
     except GithubException as e:
         print(e)
