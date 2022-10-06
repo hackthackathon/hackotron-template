@@ -13,12 +13,12 @@ issues = issues.applymap(lambda x: x.strip())
 
 
 # create milestones
-for m in issues['milestone'].unique():
-    try:
-        repo.create_milestone(title=m, state='open')
-    except GithubException as e:
-        if e.data["errors"][0].get("code", None) != "already_exists":
-            raise 
+#for m in issues['milestone'].unique():
+#    try:
+#        repo.create_milestone(title=m, state='open')
+#    except GithubException as e:
+#        if e.data["errors"][0].get("code", None) != "already_exists":
+#            raise 
 
 milestones = repo.get_milestones()
 milestone_titles = [m.title for m in milestones]
@@ -51,7 +51,7 @@ labels = repo.get_labels()
 label_titles = [l.name for l in labels]
 
 # create issues
-for i in issues.index:
+for i in issues.index[:2]:
     m = issues.loc[i, "milestone"]
     idx = milestone_titles.index(m)
     milestone = milestones[idx]
@@ -67,6 +67,7 @@ for i in issues.index:
     try:
         repo.create_issue(title=title, labels=label, milestone=milestone)
     except GithubException as e:
+        print(e)
         if e.data["errors"][0].get("code", None) != "already_exists":
             raise 
 
