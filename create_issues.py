@@ -5,7 +5,7 @@ import os
 import numpy as np
 
 g = Github(os.environ["GITHUB_SECRET"])
-repo = g.get_repo("dhuppenkothen/hackotron-template")
+repo = g.get_repo(os.environ["REPO_NAME"])
 
 issues = pd.read_csv("checklist-issues.txt", skiprows=1, 
                      names=["issue", "label", "milestone"])
